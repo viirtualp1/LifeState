@@ -1,0 +1,29 @@
+@import 'assets/scss/main';
+
+.test-card {
+  &__title.v-card-title {
+    align-items: center;
+  }
+
+  &__date {
+    color: #959595;
+  }
+
+  &__state {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+  }
+
+  &__name {
+    font-size: 18px;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+
+  &__actions.v-card-actions {
+    padding-top: 0;
+    padding-inline: 24px;
+  }
+}

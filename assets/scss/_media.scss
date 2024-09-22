@@ -1,0 +1,151 @@
+@mixin media-down($max) {
+  @media screen and (max-width: $max - 1px) {
+    @content;
+  }
+}
+
+@mixin media-up($min) {
+  @media screen and (min-width: $min) {
+    @content;
+  }
+}
+
+@mixin media-between($min, $max) {
+  @media screen and (min-width: $min - 1px) and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin media-xs-up {
+  @include media-up($media-xs) {
+    @content;
+  }
+}
+
+@mixin media-xs-down {
+  @include media-down($media-xs) {
+    @content;
+  }
+}
+
+@mixin media-sm-up {
+  @include media-up($media-sm) {
+    @content;
+  }
+}
+
+@mixin media-sm-down {
+  @include media-down($media-sm) {
+    @content;
+  }
+}
+
+@mixin media-sm-only {
+  @include media-between($media-sm, $media-md) {
+    @content;
+  }
+}
+
+@mixin media-md-up {
+  @include media-up($media-md) {
+    @content;
+  }
+}
+
+@mixin media-md-down {
+  @include media-down($media-md) {
+    @content;
+  }
+}
+
+@mixin media-md-only {
+  @include media-between($media-md, $media-lg) {
+    @content;
+  }
+}
+
+@mixin media-lg-up {
+  @include media-up($media-lg) {
+    @content;
+  }
+}
+
+@mixin media-lg-down {
+  @include media-down($media-lg) {
+    @content;
+  }
+}
+
+@mixin media-lg-only {
+  @include media-between($media-lg + 1, $media-xl) {
+    @content;
+  }
+}
+
+@mixin media-xl-up {
+  @include media-up($media-xl) {
+    @content;
+  }
+}
+
+@mixin media-xl-down {
+  @include media-down($media-xl) {
+    @content;
+  }
+}
+
+@mixin hidden-sm-down {
+  display: block;
+
+  @include media-md-down {
+    display: none;
+  }
+}
+
+@mixin hidden-md-down {
+  display: block;
+
+  @include media-md-down {
+    display: none;
+  }
+}
+
+@mixin hidden-lg-down {
+  display: block;
+
+  @include media-lg-down {
+    display: none;
+  }
+}
+
+@mixin hidden-sm-up {
+  display: block;
+
+  @include media-sm-up {
+    display: none;
+  }
+}
+
+@mixin hidden-md-up {
+  display: block;
+
+  @include media-md-up {
+    display: none;
+  }
+}
+
+@mixin hidden-lg-up {
+  display: block;
+
+  @include media-lg-up {
+    display: none;
+  }
+}
+
+@mixin hover {
+  &:hover {
+    @media ((hover: hover) and (pointer: fine)) {
+      @content;
+    }
+  }
+}

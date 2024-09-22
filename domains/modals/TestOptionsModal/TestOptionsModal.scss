@@ -1,0 +1,12 @@
+.test-options-modal {
+  &__date {
+    margin-bottom: 24px;
+  }
+
+  .v-card-text {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-inline: 0;
+  }
+}
