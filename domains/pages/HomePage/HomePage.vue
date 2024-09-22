@@ -28,7 +28,7 @@
 
       <h2 class="home-page__results-title">Результаты</h2>
 
-      <div class="home-page__results">
+      <div v-if="results.length > 0" class="home-page__results">
         <state-card
           v-for="(result, resultIdx) in results"
           :key="resultIdx"
