@@ -25,11 +25,13 @@
 
 <script setup lang="ts">
 import { formatISO } from 'date-fns'
+import { useLocalStorage } from '@vueuse/core'
 import { tests } from '@/utils/state'
-import type { ScoreType } from '@/types/state'
+import type { ScoreType, TestStorageData } from '@/types/state'
 import { TestCard } from '@/domains/test'
 import { LsButton } from '@/domains/ui'
 
+const data = useLocalStorage<TestStorageData[]>('tests', [])
 const route = useRoute()
 const router = useRouter()
 
@@ -100,7 +102,10 @@ function setScore(data: { index: number; score: ScoreType }) {
 }
 
 function saveResults() {
-  localStorage.setItem(`tests-${date.value}`, JSON.stringify(tests))
+  data.value.push({
+    date: date.value,
+    data: JSON.stringify(tests),
+  })
 }
 </script>
 

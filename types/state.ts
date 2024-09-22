@@ -15,3 +15,8 @@ export interface TestData {
   title: string
   states: StateEntity[]
 }
+
+export interface TestStorageData {
+  date: string
+  data: string
+}

@@ -26,7 +26,16 @@
         </ls-button>
       </div>
 
-      <h2 class="home-page__results">Результаты</h2>
+      <h2 class="home-page__results-title">Результаты</h2>
+
+      <div class="home-page__results">
+        <state-card
+          v-for="(result, resultIdx) in results"
+          :key="resultIdx"
+          :date="result.date"
+          :data="JSON.parse(result.data)"
+        />
+      </div>
     </div>
   </div>
 
@@ -35,9 +44,13 @@
 
 <script setup lang="ts">
 import { formatISO } from 'date-fns'
+import { useLocalStorage } from '@vueuse/core'
+import type { TestStorageData } from '@/types/state'
 import { LsButton, useLsModal } from '@/domains/ui'
 import { TestOptionsModal } from '@/domains/modals'
+import { StateCard } from '@/domains/state'
 
+const results = useLocalStorage<TestStorageData[]>('tests', [])
 const { isOpen, open } = useLsModal()
 const router = useRouter()
 
