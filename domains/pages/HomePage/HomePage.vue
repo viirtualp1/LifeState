@@ -43,7 +43,6 @@
 </template>
 
 <script setup lang="ts">
-import { formatISO } from 'date-fns'
 import { useLocalStorage } from '@vueuse/core'
 import type { TestStorageData } from '@/types/state'
 import { LsButton, useLsModal } from '@/domains/ui'
@@ -55,14 +54,8 @@ const { isOpen, open } = useLsModal()
 const router = useRouter()
 
 const testLink = computed(() => {
-  const date = new Date()
-  const parsedDate = formatISO(date)
-
   return router.resolve({
     name: 'test',
-    query: {
-      date: parsedDate,
-    },
   }).href
 })
 </script>

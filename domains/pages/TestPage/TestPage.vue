@@ -1,7 +1,7 @@
 <template>
   <div class="test-page">
-    <test-card :states="currentTest.states" :date="date" @set:score="setScore">
-      <template #title>{{ currentTest.title }}</template>
+    <test-card :states="testToShow.states" :date="date" @set:score="setScore">
+      <template #title>{{ testToShow.title }}</template>
 
       <template #actions>
         <ls-button
@@ -36,8 +36,9 @@ const route = useRoute()
 const router = useRouter()
 
 const currentTestIndex = ref(0)
+const currentTest = ref(tests[0])
 
-const currentTest = computed(() => {
+const testToShow = computed(() => {
   return tests[currentTestIndex.value]
 })
 

@@ -47,7 +47,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'set:score', data: { index: number; score: ScoreType }): void
+  (e: 'set:score', data: { index: number; score: ScoreType | null }): void
 }>()
 
 const items = computed(() => [
@@ -66,7 +66,7 @@ function getStateHint(hint: string) {
   return hint.length > 45 ? hint : ''
 }
 
-function setAnswer(index: number, score: ScoreType) {
+function setAnswer(index: number, score: ScoreType | null) {
   emit('set:score', {
     index,
     score,
