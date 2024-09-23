@@ -1,8 +1,17 @@
 @import 'assets/scss/main';
 
 .test-card {
-  &__title.v-card-title {
+  &__header.v-card-title {
     align-items: center;
+  }
+
+  &__title {
+    max-width: 280px;
+    text-wrap: balance;
+
+    @include media-sm-up {
+      max-width: none;
+    }
   }
 
   &__date {
@@ -23,6 +32,7 @@
   }
 
   &__actions.v-card-actions {
+    flex-wrap: wrap;
     padding-top: 0;
     padding-inline: 24px;
   }

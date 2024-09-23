@@ -1,7 +1,9 @@
 <template>
-  <v-card class="test-card">
-    <v-card-title class="test-card__title">
-      <slot name="title" />
+  <v-card class="test-card" :elevation="0">
+    <v-card-title class="test-card__header">
+      <div class="test-card__title">
+        {{ title }}
+      </div>
 
       <div class="test-card__date">
         {{ formattedDate }}
@@ -31,7 +33,7 @@
       </v-col>
     </v-card-text>
 
-    <v-card-actions class="test-card__actions">
+    <v-card-actions v-if="$slots.actions" class="test-card__actions">
       <slot name="actions" />
     </v-card-actions>
   </v-card>
@@ -42,6 +44,7 @@ import { format } from 'date-fns'
 import { type StateEntity, ScoreType } from '@/types/state'
 
 const props = defineProps<{
+  title: string
   states: StateEntity[]
   date: string | Date
 }>()

@@ -4,21 +4,31 @@
 .ls-button {
   border: 0;
   background: none;
-  padding: 0 48px;
+  padding: 0 24px;
   height: 52px;
   border-radius: 12px;
   appearance: none;
   outline: none;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.4s ease;
+
+  @include media-sm-up {
+    padding: 0 48px;
+    font-size: 16px;
+  }
 
   &:is(a) {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 
   &.is-accent {
@@ -44,6 +54,15 @@
 
     .ls-button__append {
       color: $color-gray;
+    }
+  }
+
+  &.is-success {
+    background-color: $color-success;
+    color: $color-white;
+
+    &:hover {
+      background-color: color.scale($color-success, $lightness: 20%);
     }
   }
 

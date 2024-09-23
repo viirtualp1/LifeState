@@ -1,25 +1,33 @@
 <template>
   <div class="test-page">
-    <test-card :states="testToShow.states" :date="date" @set:score="setScore">
-      <template #title>{{ testToShow.title }}</template>
+    <test-card
+      :title="testToShow.title"
+      :states="testToShow.states"
+      :date="date"
+      @set:score="setScore"
+    />
 
-      <template #actions>
-        <ls-button
-          class="test-page__button"
-          theme="secondary"
-          @click="onPrevButtonClick"
-        >
-          {{ prevButtonText }}
-        </ls-button>
-        <ls-button
-          class="test-page__button"
-          theme="accent"
-          @click="onNextButtonClick"
-        >
-          {{ nextButtonText }}
-        </ls-button>
-      </template>
-    </test-card>
+    <div class="test-page__actions">
+      <ls-button
+        class="test-page__button"
+        theme="secondary"
+        :disabled="isFirstTest"
+        @click="prevTest"
+      >
+        Назад
+      </ls-button>
+      <ls-button
+        class="test-page__button"
+        :theme="isLastTest ? 'success' : 'accent'"
+        @click="onNextButtonClick"
+      >
+        {{ nextButtonText }}
+      </ls-button>
+
+      <ls-button class="test-page__button" theme="secondary" to="/">
+        На главную
+      </ls-button>
+    </div>
   </div>
 </template>
 
@@ -33,7 +41,6 @@ import { LsButton } from '@/domains/ui'
 
 const data = useLocalStorage<TestStorageData[]>('tests', [])
 const route = useRoute()
-const router = useRouter()
 
 const currentTestIndex = ref(0)
 const currentTest = ref(tests[0])
@@ -54,23 +61,9 @@ const isLastTest = computed(() => {
   return currentTestIndex.value === tests.length - 1
 })
 
-const prevButtonText = computed(() => {
-  return isFirstTest.value ? 'На главную' : 'Назад'
-})
-
 const nextButtonText = computed(() => {
   return isLastTest.value ? 'Сохранить' : 'Далее'
 })
-
-function onPrevButtonClick() {
-  if (isFirstTest.value) {
-    router.push('/')
-
-    return
-  }
-
-  prevTest()
-}
 
 function onNextButtonClick() {
   if (isLastTest.value) {
@@ -98,7 +91,7 @@ function nextTest() {
   currentTestIndex.value++
 }
 
-function setScore(data: { index: number; score: ScoreType }) {
+function setScore(data: { index: number; score: ScoreType | null }) {
   currentTest.value.states[data.index].score = data.score
 }
 

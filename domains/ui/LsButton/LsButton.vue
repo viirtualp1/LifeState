@@ -1,5 +1,11 @@
 <template>
-  <component :is="component" class="ls-button" :class="buttonClasses" :to="to">
+  <component
+    :is="component"
+    class="ls-button"
+    :class="buttonClasses"
+    :to="to"
+    :disabled="disabled"
+  >
     <div class="ls-button__body">
       <slot />
     </div>
@@ -12,8 +18,9 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  theme: 'accent' | 'secondary'
+  theme: 'accent' | 'secondary' | 'success'
   to?: string
+  disabled?: boolean
 }>()
 
 const component = computed(() => {
